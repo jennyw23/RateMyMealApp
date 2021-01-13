@@ -1,0 +1,20 @@
+PODS:
+  - Alamofire (5.4.1)
+  - SearchTextField (1.2.4)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.2)
+  - SearchTextField
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - SearchTextField
+
+SPEC CHECKSUMS:
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  SearchTextField: 40dc3cc57def5a211f263cac263622c163bbc25a
+
+PODFILE CHECKSUM: e62ddf2305f659abf57f1dfc069163269aeecb63
+
+COCOAPODS: 1.10.0
