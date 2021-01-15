@@ -20,6 +20,7 @@
 		F84B0CA124E46188006AF108 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84B0CA024E46188006AF108 /* RatingControl.swift */; };
 		F850F93C25AE4179008A17C3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850F93B25AE4179008A17C3 /* User.swift */; };
 		F850F94E25AE5C59008A17C3 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850F94D25AE5C59008A17C3 /* Rating.swift */; };
+		F850F95F25B1005F008A17C3 /* Meal2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F850F95E25B1005F008A17C3 /* Meal2.swift */; };
 		F874182C2553B7E100A9ADC1 /* FoodSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F874182B2553B7E100A9ADC1 /* FoodSearchTableViewController.swift */; };
 		F8F1857E24EB30E100EA4F7B /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F1857D24EB30E100EA4F7B /* MealTableViewCell.swift */; };
 		F8F1858024EB38AB00EA4F7B /* MealTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F1857F24EB38AB00EA4F7B /* MealTableViewController.swift */; };
@@ -57,6 +58,7 @@
 		F84B0CA024E46188006AF108 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		F850F93B25AE4179008A17C3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F850F94D25AE5C59008A17C3 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
+		F850F95E25B1005F008A17C3 /* Meal2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal2.swift; sourceTree = "<group>"; };
 		F874182B2553B7E100A9ADC1 /* FoodSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchTableViewController.swift; sourceTree = "<group>"; };
 		F8F1857D24EB30E100EA4F7B /* MealTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
 		F8F1857F24EB38AB00EA4F7B /* MealTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
@@ -105,7 +107,6 @@
 		F8269D8024DB92E4005AB7E8 = {
 			isa = PBXGroup;
 			children = (
-				F850F95325AEAE5E008A17C3 /* Controllers */,
 				F8269D8B24DB92E5005AB7E8 /* FoodTracker */,
 				F8269DA224DB92EA005AB7E8 /* FoodTrackerTests */,
 				F8269D8A24DB92E5005AB7E8 /* Products */,
@@ -128,11 +129,10 @@
 			children = (
 				F8269D8C24DB92E5005AB7E8 /* AppDelegate.swift */,
 				F8269D8E24DB92E5005AB7E8 /* SceneDelegate.swift */,
-				F850F94C25AE5AC5008A17C3 /* Networking */,
-				F84B0CA024E46188006AF108 /* RatingControl.swift */,
-				F8188A2A24E8E3490053B29A /* Meal.swift */,
-				F8F1857D24EB30E100EA4F7B /* MealTableViewCell.swift */,
 				F8269D9224DB92E5005AB7E8 /* Main.storyboard */,
+				F850F95325AEAE5E008A17C3 /* Controllers */,
+				F850F96225B17304008A17C3 /* Models */,
+				F850F94C25AE5AC5008A17C3 /* Networking */,
 				F8269D9524DB92EA005AB7E8 /* Assets.xcassets */,
 				F8269D9724DB92EA005AB7E8 /* LaunchScreen.storyboard */,
 				F8269D9A24DB92EA005AB7E8 /* Info.plist */,
@@ -154,6 +154,7 @@
 			children = (
 				F850F93B25AE4179008A17C3 /* User.swift */,
 				F850F94D25AE5C59008A17C3 /* Rating.swift */,
+				F850F95E25B1005F008A17C3 /* Meal2.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -165,7 +166,18 @@
 				F8F1857F24EB38AB00EA4F7B /* MealTableViewController.swift */,
 				F874182B2553B7E100A9ADC1 /* FoodSearchTableViewController.swift */,
 			);
-			path = Controllers;
+			name = Controllers;
+			path = ../Controllers;
+			sourceTree = "<group>";
+		};
+		F850F96225B17304008A17C3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F84B0CA024E46188006AF108 /* RatingControl.swift */,
+				F8F1857D24EB30E100EA4F7B /* MealTableViewCell.swift */,
+				F8188A2A24E8E3490053B29A /* Meal.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,6 +357,7 @@
 				F850F94E25AE5C59008A17C3 /* Rating.swift in Sources */,
 				F850F93C25AE4179008A17C3 /* User.swift in Sources */,
 				F8269D8F24DB92E5005AB7E8 /* SceneDelegate.swift in Sources */,
+				F850F95F25B1005F008A17C3 /* Meal2.swift in Sources */,
 				F874182C2553B7E100A9ADC1 /* FoodSearchTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

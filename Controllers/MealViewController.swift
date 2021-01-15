@@ -46,8 +46,12 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchUsers()
-        fetchSingleUser()
+        postMeal(mealName: "water")
+        postMeal(mealName: "onion")
+        postRating(userUuid: "69f51b1c-cbbe-4592-a2d0-bea4702f7458", mealUuid: "5c01e62f-981d-4d3e-8dc4-911c04b34767", ratingScore: 3)
+        getMeals()
+        //getUserJSONData()
+        //getSingleUser(userUuid: "f4475484-b5dc-4e7d-8ae3-4ff5b1bb80c0")
         
         //handle the text field's user input through delegate callbacks
         nameTextField.delegate = self
@@ -285,36 +289,78 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
 
 extension MealViewController {
     
-    func fetchSingleUser() {
-        let myUuid = "f4475484-b5dc-4e7d-8ae3-4ff5b1bb80c0"
-        AF.request("http://localhost:3000/users/\(myUuid)")
+    func getMeals() {
+        AF.request("http://localhost:3000/meals/")
+        .validate()
+            .responseDecodable(of: [Meal2].self) { (response) in
+                guard let mealData = response.value else {
+                    print("Error fetching meal data: \(String(describing: response.error))")
+                    return
+                }
+                print("All Meals in Database: ")
+                for meal in mealData {
+                    print(meal.mealName)
+                }
+            }
+
+    }
+    
+    func postMeal(mealName: String) {
+        let url: String = "http://localhost:3000/meals"
+        
+        let params: [String: String] = [
+            "mealName": mealName
+        ]
+
+        AF.request(url, method: .post, parameters: params).responseString { (response) in
+            guard response.value != nil else {
+                print("Post request failed: \(String(describing: response.error))")
+                return
+            }
+            print("posted meals!")
+        }
+    }
+    
+    func postRating(userUuid: String, mealUuid: String, ratingScore: Int) {
+        let url: String = "http://localhost:3000/ratings"
+
+        let params: [String: Any] = [
+            "userUuid": userUuid,
+            "mealUuid": mealUuid,
+            "ratingScore": ratingScore
+        ]
+
+        AF.request(url, method: .post, parameters: params).responseString { (response) in
+            guard response.value != nil else {
+                print("Post request failed: \(String(describing: response.error))")
+                return
+            }
+            print("posted rating to user \(userUuid)!")
+        }
+    }
+    
+    func getSingleUser(userUuid: String) {
+        //let myUuid = "f4475484-b5dc-4e7d-8ae3-4ff5b1bb80c0"
+        AF.request("http://localhost:3000/users/\(userUuid)")
         .validate()
         .responseDecodable(of: User.self) { (response) in
           guard let userData = response.value else {
-            print("Returned without retrieving data")
+            print("FetchSingerUser Error: \(String(describing: response.error))")
             return }
-            print("Got past guard statement")
-            print(userData.username)
-        }
-       /*
-        let userRatingsData: [UserInfo.Rating] = userData.ratings
-        
-        for i in 0...userRatingsData.count {
-
-            let mealName: String = userRatingsData[i].meal.mealName
-            let ratingScore: String = userRatingsData[i].ratingScore
+            print("User userUuid Meals: ")
+            for rating in userData.ratings {
+                print(rating.meal.mealName)
+            }
             
-            self.userRatingsAndMeals += [(mealName, ratingScore)]
+            
         }
-*/
       }
     
-    func fetchUsers() {
-        // 1
-        let request = AF.request("http://localhost:3000/users/")
-        // 2
-        request.responseJSON { (data) in
-          print(data)
-        }
-      }
+    func getUserJSONData() {
+        AF.request("http://localhost:3000/users/")
+        .validate()
+        .responseJSON { (data) in
+              print(data)
+            }
+    }
 }

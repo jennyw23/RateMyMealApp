@@ -12,7 +12,7 @@ struct Rating: Decodable {
     
     var id: Int
     var ratingUuid: String
-    var ratingScore: String
+    var ratingScore: Int
     var createdAt: String
     var updatedAt: String
     var mealId: Int
@@ -27,4 +27,15 @@ struct Rating: Decodable {
         var createdAt: String
         var updatedAt: String
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case ratingUuid
+        case ratingScore
+        case createdAt
+        case updatedAt
+        case mealId
+        case userId
+        case meal
+      }
 }

@@ -166,20 +166,7 @@ class MealTableViewController: UITableViewController {
             os_log("error: %@", log: .default, type: .error, String(describing: error))
 
         }
-        /*
-       do {
-        
-        let mealData = try NSKeyedArchiver.archivedData(withRootObject: meals, requiringSecureCoding: true)
-        
-        try mealData.write(to: Meal.ArchiveURL)
-        print(mealData)
-        os_log("Meals successfully saved. ", log: OSLog.default, type: .debug)
-
-       } catch {
-        os_log("error: %@", log: .default, type: .error, String(describing: error))
-
-        }
- */
+       
     }
             
     //MARK: Actions
@@ -225,22 +212,7 @@ class MealTableViewController: UITableViewController {
             }
         
         return nil
-        /*
-        do {
-            
-            let fileData = try Data(contentsOf: Meal.ArchiveURL)
-            print("This is file data: ", fileData)
-            print(type(of: fileData))
-            let loadedStrings = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, Meal.self], from: fileData) as! [Meal] // error happening here
-            print(loadedStrings)
-        } catch {
-            //print(Meal.ArchiveURL)
-            os_log("error: %@", log: .default, type: .error, String(describing: error))
 
-        }
-   
-        return meals
-         */
     }
     
 }
