@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9my-ky-Kyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ILD-hJ-K1l">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -14,7 +14,7 @@
             <objects>
                 <tableViewController id="X3x-IX-kBp" customClass="MealTableViewController" customModule="FoodTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qbI-qq-iai">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -72,14 +72,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MealViewController" customModule="FoodTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DKY-gi-z9m">
-                                <rect key="frame" x="0.0" y="138" width="414" height="404.5"/>
+                                <rect key="frame" x="0.0" y="106" width="414" height="382.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter meal name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1MG-za-H0y" customClass="SearchTextField" customModule="SearchTextField">
-                                        <rect key="frame" x="139" y="0.0" width="136" height="58.5"/>
+                                        <rect key="frame" x="139" y="0.0" width="136" height="36.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
@@ -87,14 +87,14 @@
                                         </connections>
                                     </textField>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="200" placeholderIntrinsicHeight="280" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="nBQ-y2-6YY">
-                                        <rect key="frame" x="107" y="66.5" width="200" height="280"/>
+                                        <rect key="frame" x="107" y="44.5" width="200" height="280"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="fmJ-hS-ChM" appends="YES" id="MFf-1E-y3g"/>
                                         </connections>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ifr-3p-t50" customClass="RatingControl" customModule="FoodTracker" customModuleProvider="target">
-                                        <rect key="frame" x="81" y="354.5" width="252" height="50"/>
+                                        <rect key="frame" x="81" y="332.5" width="252" height="50"/>
                                     </stackView>
                                 </subviews>
                             </stackView>
@@ -137,13 +137,71 @@
             </objects>
             <point key="canvasLocation" x="1957.9710144927537" y="110.49107142857143"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="kmW-X5-asI">
+            <objects>
+                <viewController id="ILD-hJ-K1l" customClass="LoginViewController" customModule="FoodTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4rr-Vn-Gnn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYu-wG-CG2">
+                                <rect key="frame" x="100" y="610" width="214" height="65"/>
+                                <color key="backgroundColor" red="0.68810718911917101" green="0.61789833508077474" blue="0.34935678352224969" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="V6R-2I-pPT"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Log In"/>
+                                <connections>
+                                    <action selector="loginButton:" destination="ILD-hJ-K1l" eventType="touchUpInside" id="Vik-Tj-YWQ"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="neS-SQ-fpC">
+                                <rect key="frame" x="100" y="331" width="214" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="InZ-y9-iJb">
+                                <rect key="frame" x="100" y="275" width="214" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="QUa-hf-uDc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QUa-hf-uDc" firstAttribute="trailing" secondItem="InZ-y9-iJb" secondAttribute="trailing" constant="100" id="2VX-fG-8mA"/>
+                            <constraint firstItem="InZ-y9-iJb" firstAttribute="leading" secondItem="QUa-hf-uDc" secondAttribute="leading" constant="100" id="CIE-Vl-Mm6"/>
+                            <constraint firstItem="dYu-wG-CG2" firstAttribute="leading" secondItem="QUa-hf-uDc" secondAttribute="leading" constant="100" id="EBt-AN-h6j"/>
+                            <constraint firstItem="neS-SQ-fpC" firstAttribute="top" secondItem="InZ-y9-iJb" secondAttribute="bottom" constant="22" id="OdT-IV-teU"/>
+                            <constraint firstItem="QUa-hf-uDc" firstAttribute="bottom" secondItem="dYu-wG-CG2" secondAttribute="bottom" constant="187" id="QQM-vK-CyB"/>
+                            <constraint firstItem="QUa-hf-uDc" firstAttribute="trailing" secondItem="neS-SQ-fpC" secondAttribute="trailing" constant="100" id="cFU-ZA-WQO"/>
+                            <constraint firstItem="neS-SQ-fpC" firstAttribute="top" secondItem="4rr-Vn-Gnn" secondAttribute="top" constant="331" id="hlg-L8-uko"/>
+                            <constraint firstItem="neS-SQ-fpC" firstAttribute="leading" secondItem="QUa-hf-uDc" secondAttribute="leading" constant="100" id="pQB-Zd-L8V"/>
+                            <constraint firstItem="QUa-hf-uDc" firstAttribute="trailing" secondItem="dYu-wG-CG2" secondAttribute="trailing" constant="100" id="vjC-zb-Xms"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="PasswordTextField" destination="neS-SQ-fpC" id="3pK-gn-apz"/>
+                        <outlet property="UsernameTextField" destination="InZ-y9-iJb" id="Shu-q5-yTD"/>
+                        <segue destination="9my-ky-Kyx" kind="presentation" identifier="LoggedIn" id="k10-99-qSz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3dh-1j-obo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1608.6956521739132" y="110.49107142857143"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="A3n-vJ-eWk">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9my-ky-Kyx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dwv-jc-rGQ">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -179,6 +237,9 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="defaultPhoto" width="212.5" height="141"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

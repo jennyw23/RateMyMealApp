@@ -13,6 +13,8 @@ struct Meal2: Decodable {
     var id: Int
     var mealUuid: String
     var mealName: String
+    var imagePath: String
+    var hasImageFile: Bool
     var createdAt: String
     var updatedAt: String
 }

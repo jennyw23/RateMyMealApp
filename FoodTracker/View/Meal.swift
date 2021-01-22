@@ -5,7 +5,6 @@
 //  Created by Jenny Wang on 8/15/20.
 //  Copyright © 2020 Jenny Wang. All rights reserved.
 //
-
 import UIKit
 import os.log
 
@@ -16,21 +15,18 @@ class Meal: NSObject, NSCoding {
     struct PropertyKey {
         static let name = "name"
         static let photo = "photo"
+        static let imagePath = "imagePath"
         static let rating = "rating"
     }
     
     var name: String
     var photo: UIImage?
+    var imagePath: String?
     var rating: Int
     
-    //MARK: Archiving Paths
-    
-       static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
-       static let ArchiveURL = DocumentsDirectory.appendingPathComponent("meals")
     
     //MARK: Initialization
-
-    init?(name: String, photo: UIImage?, rating: Int){
+    init?(name: String, photo: UIImage?, imagePath: String?, rating: Int){
         
         // the name must not be empty
         guard !name.isEmpty else {
@@ -45,6 +41,7 @@ class Meal: NSObject, NSCoding {
         // Initialize stored properties.
         self.name = name
         self.photo = photo
+        self.imagePath = imagePath
         self.rating = rating
     }
     
@@ -53,6 +50,7 @@ class Meal: NSObject, NSCoding {
     func encode(with coder: NSCoder) {
 
         coder.encode(name, forKey: PropertyKey.name)
+        coder.encode(imagePath, forKey: PropertyKey.imagePath)
         coder.encode(photo, forKey: PropertyKey.photo)
         coder.encode(rating, forKey: PropertyKey.rating)
         
@@ -66,13 +64,17 @@ class Meal: NSObject, NSCoding {
                }
     
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
+        let imagePath = aDecoder.decodeObject(forKey: PropertyKey.imagePath) as? String
+
         let rating = aDecoder.decodeInteger(forKey: PropertyKey.rating)
 
         
         // Must call designated initializer.
-        self.init(name: name, photo: photo, rating: rating)
+        self.init(name: name, photo: photo, imagePath: imagePath, rating: rating)
+    }
+    
+    func toString() {
+        print("Name: \(self.name), Photo: \(String(describing: self.photo ?? UIImage(named: "meal1"))), Image Path: \(String(describing: self.imagePath)), Rating: \(self.rating)")
     }
     
 }
-
-

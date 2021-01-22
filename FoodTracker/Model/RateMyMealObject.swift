@@ -1,5 +1,5 @@
 //
-//  Rating.swift
+//  RestfulAPICalls.swift
 //  FoodTracker
 //
 //  Created by Jenny Wang on 1/12/21.
@@ -7,6 +7,19 @@
 //
 
 import Foundation
+
+struct User: Decodable {
+    
+    var id: Int
+    var userUuid: String
+    var username: String
+    var password: String
+    var email: String
+    var createdAt: String
+    var updatedAt: String
+    var ratings: [Rating]
+    
+}
 
 struct Rating: Decodable {
     
@@ -24,6 +37,7 @@ struct Rating: Decodable {
         var id: Int
         var mealUuid: String
         var mealName: String
+        var imagePath: String
         var createdAt: String
         var updatedAt: String
     }
