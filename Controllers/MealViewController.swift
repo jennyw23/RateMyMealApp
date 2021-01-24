@@ -18,6 +18,7 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         // Depending on stype of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways.
         let isPresentingInAddMealMode = presentingViewController is UINavigationController
@@ -89,9 +90,8 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
     // Set default image to the text that is in the text field
     func replaceDefaultImage() -> Void {
         
-        // find the correct image associated with chosen search::: NOTE THAT EVERYTHING IS IN THIS HANDLER!!!
         self.nameTextField.itemSelectionHandler = { filteredResults, itemPosition in
-            // Just in case you need the item position
+
             let item = filteredResults[itemPosition]
             //print("Item at position \(itemPosition): \(item.title)")
             
@@ -100,7 +100,6 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             
             // set the image.png file to image path
             let imagePath = FoodWebService.searchResultsImages[itemPosition]
-
             self.imagePathToSave = imagePath //NEEDED TO SEND TO DATABASE; MEALDATAMODEL updated 2021
             
             self.photoImageView.image = FoodWebService.loadUIImageFromURL(imagePath: imagePath)
@@ -159,13 +158,13 @@ class MealViewController: UIViewController, UITextFieldDelegate, UIImagePickerCo
             return
         }
         let name = nameTextField.text ?? ""
-        //let photo = photoImageView.image (this is used for gallery picker photos)
+        let photo = photoImageView.image //(this is used for gallery picker photos)
         let imagePath = self.imagePathToSave
-        let photo = FoodWebService.loadUIImageFromURL(imagePath: imagePath) // loads image from path name
+        //let photo = FoodWebService.loadUIImageFromURL(imagePath: imagePath) // loads image from path name
         let rating = ratingControl.rating
         
         // Set the meal to be passed to MealTableViewController after the unwind segue.
-        meal = Meal(name: name, photo: photo, imagePath: self.imagePathToSave, rating: rating)
+        meal = Meal(name: name, photo: photo, imagePath: imagePath, rating: rating)
         
     }
     //MARK: Actions

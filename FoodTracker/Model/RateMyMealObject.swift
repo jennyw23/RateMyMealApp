@@ -8,6 +8,21 @@
 
 import Foundation
 
+
+// MARK: SPOONACULAR Database JSON Decodable Objects
+
+struct Food: Decodable {
+    let mealName: String
+    let mealImage: String
+    
+    enum CodingKeys: String, CodingKey {
+        case mealName = "name"
+        case mealImage = "image"
+    }
+}
+
+// MARK: RATEMYMEAL Database JSON Decodable Objects
+
 struct User: Decodable {
     
     var id: Int

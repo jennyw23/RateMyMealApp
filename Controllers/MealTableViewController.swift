@@ -173,42 +173,38 @@ class MealTableViewController: UITableViewController {
 
         switch action {
         case .addNew:
-            do {
-                for meal in meals {
-                     let hasImageFile: Bool = true
-                    /* build an if statement to determine if the food item has an image file
-                     if (/*some logic that makes sense - jenny 1/17/21*/ meal != nil) {
-                         hasImageFile = false
-                     } else {
-                         hasImageFile = true
-                     }
-                     */
-                    
-                    NetworkManager.postMealRating(mealName: meal.name, rating: meal.rating, imagePath: meal.imagePath ?? "no.png", hasImageFile: hasImageFile)
-                }
-               
-                os_log("Meals successfully saved. Case: .addNew ", log: OSLog.default, type: .debug)
-            } catch {
-                os_log("error: %@", log: .default, type: .error, String(describing: error))
+            for meal in meals {
+                 let hasImageFile: Bool = true
+                /* build an if statement to determine if the food item has an image file
+                 if (/*some logic that makes sense - jenny 1/17/21*/ meal != nil) {
+                     hasImageFile = false
+                 } else {
+                     hasImageFile = true
+                 }
+                 */
+                print("Save meals call within MEALTABLEVIEWCONTROLLER (within for loop for each meal in meals array)")
+                NetworkManager.postMealRating(mealName: meal.name, rating: meal.rating, imagePath: meal.imagePath ?? "no.png", hasImageFile: hasImageFile)
             }
+           
+            print("Meals successfully saved. Case: .addNew ")
+        
         case .updateExisting:
-            do {
-                for meal in meals {
-                     let hasImageFile: Bool = false
-                    /* build an if statement to determine if the food item has an image file
-                     if (/*some logic that makes sense - jenny 1/17/21*/ meal != nil) {
-                         hasImageFile = false
-                     } else {
-                         hasImageFile = true
-                     }
-                     */
-                    
-                    NetworkManager.updateMealRating(mealName: meal.name, rating: meal.rating, imagePath: meal.imagePath ?? "no.png", hasImageFile: hasImageFile)
-                }
-                os_log("Meals successfully updated. Case: .updateExisting ", log: OSLog.default, type: .debug)
-            } catch {
-                os_log("error: %@", log: .default, type: .error, String(describing: error))
+
+            for meal in meals {
+                 let hasImageFile: Bool = false
+                /* build an if statement to determine if the food item has an image file
+                 if (/*some logic that makes sense - jenny 1/17/21*/ meal != nil) {
+                     hasImageFile = false
+                 } else {
+                     hasImageFile = true
+                 }
+                 */
+                print("Update meals call within MEALTABLEVIEWCONTROLLER (within for loop for each meal in meals array)")
+
+                NetworkManager.updateMealRating(mealName: meal.name, rating: meal.rating, imagePath: meal.imagePath ?? "no.png", hasImageFile: hasImageFile)
             }
+            print("Meals successfully updated. Case: .updateExisting ")
+
         }
     }
     

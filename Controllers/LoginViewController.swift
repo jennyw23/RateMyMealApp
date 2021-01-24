@@ -11,44 +11,42 @@ import os.log
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var LoginFailedPopUp: UILabel!
     @IBOutlet weak var UsernameTextField: UITextField!
     @IBOutlet weak var PasswordTextField: UITextField!
-
+    
     let user = NetworkManager()
-
-    var imageView: UIImageView = {
-            let imageView = UIImageView(frame: .zero)
-            imageView.image = UIImage(named: "food_background.jpg")
-            imageView.contentMode = .scaleToFill
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            return imageView
-        }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 
-        view.insertSubview(imageView, at: 0)
-                NSLayoutConstraint.activate([
-                    imageView.topAnchor.constraint(equalTo: view.topAnchor),
-                    imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                    imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                    imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-                ])
-        self.view.bringSubviewToFront(self.UsernameTextField)
-        self.view.bringSubviewToFront(self.PasswordTextField)    }
+        LoginFailedPopUp.isHidden = true
+        
+    }
     
     @IBAction func loginButton(_ sender: Any) {
         
         let username = UsernameTextField.text
         let password = PasswordTextField.text
         
-        if (username == "" || password == "") {
+        if (UsernameTextField.text == "" || PasswordTextField.text == "") {
             return
         } else {
-            self.user.postLoginCredentials(username: username!, password: password!, completion: {
-                self.performSegue(withIdentifier: "LoggedIn", sender: self)
+            self.user.postLoginCredentials(username: username!, password: password!, completion: { response in
+                print(response)
+                
+                if response == true {
+                    self.performSegue(withIdentifier: "LoggedIn", sender: self)
+                } else {
+                    
+                    self.LoginFailedPopUp.isHidden = false
+
+                    FoodWebService.run(after: 3, completion: {
+                        self.LoginFailedPopUp.isHidden = true
+                    })
+                }
             })
         }
     }

@@ -13,10 +13,21 @@ class NetworkManager {
         
     static var userUuid: String = ""
     static var bearerToken: String = ""
+        
+    static var headers: HTTPHeaders = [
+            "Authorization": "Bearer ",
+           // "Content-Type": "application/json; charset=utf-8"
+        ]
+
     
     // MARK: RateMyMeal REST API Calls
     
-    func postLoginCredentials(username: String, password: String, completion: @escaping () -> Void) {
+    func setAuthorizationHeaders(token: String) {
+        NetworkManager.headers["Authorization"] = "Bearer " + token
+        print("\(NetworkManager.headers)")
+    }
+    
+    func postLoginCredentials(username: String, password: String, completion: @escaping (Bool) -> Void) {
         let url: String = "http://localhost:3000/login"
         
         let params: [String: Any] = [
@@ -26,38 +37,41 @@ class NetworkManager {
 
         AF.request(url, method: .post, parameters: params).responseString { (response) in
             
+            
             guard let result = response.data else {
                 print("Post request failed: \(String(describing: response.error))")
                 return
             }
-            
-            do {
-                let loginResponse = try JSONDecoder().decode(Login.self, from: result)
-                // set user bearer token
-                NetworkManager.userUuid = loginResponse.userUuid
-                NetworkManager.bearerToken = loginResponse.token
-                print("userUuid: \(NetworkManager.userUuid) and bearer Token: \(NetworkManager.bearerToken)")
 
+            do {
+                print("Response data \(String(describing: response.data))")
+
+                let loginResponse = try JSONDecoder().decode(Login.self, from: result)
+                
+                if loginResponse.success == true {
+                    // set user bearer token
+                    NetworkManager.userUuid = loginResponse.userUuid!
+                    NetworkManager.bearerToken = loginResponse.token!
+                    self.setAuthorizationHeaders(token: NetworkManager.bearerToken)
+                    print("Login Response\(loginResponse)")
+                    completion(true)
+                } else {
+                    print("there isn't a bearer token bc the username/password was wrong")
+                    completion(false)
+                }
             } catch {
                 print(error)
             }
-            print("Retrieved user bearer token! arrived at completion handler")
-            completion()
         }
-        
     }
 
     // This gets all ratings from a user. Adapt this method for my app to load meals
     static func getUserRatings(completion: @escaping ([Meal]) -> Void) {
-  
-        var result: [Meal] = []
-            print("user uuid" + NetworkManager.userUuid + "is empty?")
-
-        print("user uuid: \(NetworkManager.userUuid)")
-        // delete this for when i figure out my issue with async calls
-        //self.userUuid = "69f51b1c-cbbe-4592-a2d0-bea4702f7458"
         
-        AF.request("http://localhost:3000/ratings/user/\(NetworkManager.userUuid)")
+        let url = "http://localhost:3000/ratings/user/\(NetworkManager.userUuid)"
+        var result: [Meal] = []
+
+        AF.request(url, method: .get, headers: NetworkManager.headers)
         .validate()
         .responseDecodable(of: [User].self) { (response) in
         
@@ -75,10 +89,8 @@ class NetworkManager {
                     print("Meal Initialization Error: check Meal object for loop")
                     return
                 }
-                print("appending result")
                 result.append(cell)
             }
-            print("completion handler")
             completion(result)
         }
       }
@@ -90,11 +102,11 @@ class NetworkManager {
             "userUuid": NetworkManager.userUuid,
             "mealName": mealName,
             "imagePath": imagePath,
-            "hasImageFile": false, // defaults to false
+            "hasImageFile": true, // defaults to false
             "ratingScore": rating
         ]
 
-        AF.request(url, method: .put, parameters: params).responseString { (response) in
+        AF.request(url, method: .put, parameters: params, headers: NetworkManager.headers).responseString { (response) in
             guard response.value != nil else {
                 print("Put request failed: \(String(describing: response.error))")
                 return
@@ -114,7 +126,7 @@ class NetworkManager {
             "ratingScore": rating
         ]
 
-        AF.request(url, method: .post, parameters: params).responseString { (response) in
+        AF.request(url, method: .post, parameters: params, headers: NetworkManager.headers).responseString { (response) in
             guard response.value != nil else {
                 print("Post request failed: \(String(describing: response.error))")
                 return
@@ -125,14 +137,15 @@ class NetworkManager {
     
     // working on delete function [Meal]
     static func deleteMealRating(mealName: String) {
-        let url: String = "http://localhost:3000/ratings/\(NetworkManager.userUuid)/meal/\(mealName)"
+        let editedMealName = mealName.replacingOccurrences(of: " ", with: "%20")
+        let url: String = "http://localhost:3000/ratings/\(NetworkManager.userUuid)/meal/\(editedMealName)"
         
         let params: [String: Any] = [
             "userUuid": NetworkManager.userUuid,
             "mealName": mealName,
         ]
 
-        AF.request(url, method: .delete, parameters: params).responseString { (response) in
+        AF.request(url, method: .delete, parameters: params, headers: NetworkManager.headers).responseString { (response) in
             guard response.value != nil else {
                 print("Delete request failed: \(String(describing: response.error))")
                 return

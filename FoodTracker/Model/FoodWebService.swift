@@ -14,6 +14,11 @@ class FoodWebService {
     static var searchResultsImages: [String] = []
 
     static let dispatchGroup = DispatchGroup()
+    
+    static let headers = [
+        "x-rapidapi-key": "6080c0f264msh94f513bc32fa86dp1a25efjsn099feae4e8df",
+        "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
+    ]
 
     // Function that tells you how much time to wait in between calls to API
     static func run(after seconds: Int, completion: @escaping () -> Void) {
@@ -52,16 +57,13 @@ class FoodWebService {
     
     static func getFoodSearchResults(query: String) -> Void {
         
-        let headers = [
-            "x-rapidapi-key": "6080c0f264msh94f513bc32fa86dp1a25efjsn099feae4e8df",
-            "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
-        ]
+       
         let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete?query=\(query)&number=10"
         let request = NSMutableURLRequest(url: NSURL(string: urlString)! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
         request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
+        request.allHTTPHeaderFields = FoodWebService.headers
         
         // Enter dispatch group for food autocomplete search
         FoodWebService.dispatchGroup.enter()
@@ -71,17 +73,19 @@ class FoodWebService {
                 print(error!)
             } else {
                 guard let ingredientData = data else{
-                    print("Error with getting json data from Spoonacular API")
+                    print("Error getting json data from Spoonacular API")
                     return
                 }
                 DispatchQueue.main.async {
                     
                     FoodWebService.updateSearchResults(searchData: ingredientData)
                     FoodWebService.dispatchGroup.leave()
+                    
                     }
                 }
                 return
             })
+        
         dataTask.resume()
     }
     
@@ -99,18 +103,6 @@ class FoodWebService {
             FoodWebService.searchResultsImages.append(result.mealImage)
 
         }
-    }
-    
-    struct Food: Decodable {
-        let mealName: String
-        let mealImage: String
-        
-        enum CodingKeys: String, CodingKey {
-            case mealName = "name"
-            case mealImage = "image"
-        }
-    }
-
-    
+    } 
 }
 
